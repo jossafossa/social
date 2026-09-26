@@ -1,0 +1,98 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-ink);
+  background: transparent;
+  border: var(--border);
+  cursor: pointer;
+  // A label reads as one unit: next to long text the text wraps, never the button.
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[aria-busy='true'] {
+    cursor: progress;
+  }
+}
+
+.medium {
+  min-height: 44px;
+  padding: 0 1rem;
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 0.75rem;
+}
+
+.primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.accent {
+  background: var(--color-accent);
+  box-shadow: var(--shadow-small);
+
+  &:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--color-ink);
+  }
+}
+
+.secondary {
+  font-weight: 500;
+}
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-surface);
+}
+
+// A quiet action beside a stronger one (cancel next to submit): reads as a text link.
+.plain {
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-color: transparent;
+}
+
+.dashed {
+  font-weight: 500;
+  border-style: dashed;
+}
+
+// A link dressed as a button: beat the global `a:hover` colour, which would put ink on ink.
+.link {
+  text-decoration: none;
+
+  &.primary:hover {
+    color: var(--color-accent);
+  }
+
+  &.accent:hover,
+  &.secondary:hover {
+    color: var(--color-ink);
+  }
+}
+
+// Sits on the button's corner instead of inside it, so showing it never resizes the button row.
+// Mostly above the top edge, so it stays clear of the label.
+.floatingHint {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  z-index: 1;
+  pointer-events: none;
+}

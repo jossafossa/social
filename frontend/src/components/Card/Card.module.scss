@@ -1,0 +1,17 @@
+.card {
+  padding: 20px 24px;
+  background: var(--color-surface);
+  border: var(--border);
+}
+
+.default {
+  box-shadow: var(--shadow);
+}
+
+.accent {
+  box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+.danger {
+  box-shadow: 6px 6px 0 var(--color-danger);
+}

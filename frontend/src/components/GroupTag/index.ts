@@ -1,0 +1,1 @@
+export { GroupTag } from './GroupTag'

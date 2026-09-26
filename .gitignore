@@ -1,0 +1,8 @@
+node_modules
+dist
+backend/pocketbase
+backend/pb_data
+storybook-static
+.playwright-cli
+.DS_Store
+*.log

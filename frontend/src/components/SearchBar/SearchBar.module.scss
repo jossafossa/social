@@ -1,0 +1,71 @@
+.bar {
+  display: flex;
+  box-shadow: var(--shadow);
+}
+
+.field {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  background: var(--color-surface);
+  border: var(--border);
+  border-right: 0;
+  // The real control inside is hidden or borderless, so the whole control shows the ring.
+  :global(:root[data-input-modality='keyboard']) &:has(:focus-visible) {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+.prompt {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.input {
+  flex-grow: 1;
+  min-height: 52px;
+  font: inherit;
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+
+  // The surrounding field draws the ring instead.
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.submit {
+  min-height: 56px;
+  padding: 0 24px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  border: var(--border);
+  cursor: pointer;
+}
+
+.compact {
+  box-shadow: var(--shadow-small);
+
+  .field {
+    gap: 8px;
+    padding: 0 10px;
+    min-width: 0;
+  }
+
+  .input {
+    min-width: 0;
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .submit {
+    min-height: 44px;
+    padding: 0 14px;
+  }
+}

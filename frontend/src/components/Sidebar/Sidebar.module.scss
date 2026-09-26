@@ -1,0 +1,145 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 32px 24px;
+  border-right: var(--border);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px 0 28px;
+  text-decoration: none;
+}
+
+.active {
+  padding-left: 12px;
+  font-weight: 500;
+  color: var(--color-paper);
+  background: var(--color-ink);
+
+  &::before {
+    content: '> ';
+    white-space: pre;
+  }
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  text-decoration: none;
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.userActive {
+  color: var(--color-paper);
+  background: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-accent);
+
+  .userHint {
+    color: var(--color-paper);
+  }
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 14px;
+
+  strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.userHint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.logout {
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--color-muted);
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+// Where a member's own card sits: the way in for a visitor.
+.guest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: var(--border);
+  background: var(--color-surface);
+}
+
+.guestText {
+  font-size: 12px;
+  color: var(--color-muted);
+}

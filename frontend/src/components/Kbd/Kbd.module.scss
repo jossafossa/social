@@ -1,0 +1,51 @@
+// System UI font: it has proper ⌘ and ↵ glyphs, where the monospace face falls back per glyph.
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 22px;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.default {
+  height: 24px;
+  padding: 0 6px;
+  font-size: 13px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.compact {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 11px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: 1px 1px 0 var(--color-ink);
+}
+
+.inline {
+  height: 20px;
+  padding: 0 5px;
+  font-size: 12px;
+  color: inherit;
+  border: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}

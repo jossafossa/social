@@ -1,0 +1,46 @@
+// Takes the room the top bar has left, and no more.
+.breadcrumbs {
+  min-width: 0;
+}
+
+// One line: the current crumb (a long user or group name) is cut off before the trail wraps.
+.trail {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  list-style: none;
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+
+  // Only the current page (the last crumb) gives up room.
+  &:last-child {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  > :last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.link,
+.separator {
+  color: var(--color-muted);
+}
+
+.current {
+  font-weight: 700;
+}

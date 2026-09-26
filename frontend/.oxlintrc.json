@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "import", "jsx-a11y", "oxc"],
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "func-style": ["error", "expression"],
+    "arrow-body-style": ["error", "as-needed"],
+    "curly": ["error", "all"],
+    "prefer-const": "error",
+    "eqeqeq": ["error", "always"],
+    "no-nested-ternary": "error",
+    "no-console": "warn",
+    "import/no-default-export": "error",
+    "import/no-unassigned-import": "off",
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "react/no-array-index-key": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["vite.config.ts", "*.stories.tsx", ".storybook/*"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}

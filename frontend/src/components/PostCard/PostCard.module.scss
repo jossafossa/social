@@ -1,0 +1,57 @@
+// Per-post key hints (l, c, e, r): only for keyboard users, and only on the post that has focus.
+// A mouse click on a post never makes them appear.
+.post {
+  position: relative;
+}
+
+.post [data-post-hint] {
+  display: none;
+}
+
+:global(:root[data-input-modality='keyboard']) .post:focus-within [data-post-hint] {
+  display: inline-flex;
+}
+
+// One line: the author and group names shrink first, the time never does.
+.header {
+  flex-wrap: nowrap;
+  font-size: 13px;
+}
+
+.author {
+  font-weight: 700;
+}
+
+.time {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--color-muted);
+}
+
+.badge {
+  padding: 2px 8px;
+  font-size: 12px;
+  border: var(--border);
+}
+
+// k / j labels on the focused post's top and bottom edge. They overlap the edge, so nothing shifts.
+.stepHint {
+  position: absolute;
+  right: 24px;
+  z-index: 2;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  background: var(--color-surface);
+  border: var(--border);
+  pointer-events: none;
+}
+
+.previous {
+  top: -14px;
+}
+
+.next {
+  bottom: -14px;
+}

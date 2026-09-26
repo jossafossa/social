@@ -1,0 +1,64 @@
+.markdown {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+
+  // Spacing between blocks lives here: markdown output can't be wrapped in a Stack.
+  > * + * {
+    margin-top: 0.5em;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote {
+    margin: 0;
+  }
+
+  // Explicit: inside a feed's own list the browser would switch to nested-list circles.
+  ul {
+    padding-left: 1.75em;
+    list-style: disc;
+  }
+
+  ol {
+    padding-left: 1.75em;
+    list-style: decimal;
+  }
+
+  li + li {
+    margin-top: 0.125em;
+  }
+
+  blockquote {
+    padding-left: 0.75em;
+    border-left: var(--border);
+    color: var(--color-muted);
+  }
+
+  code {
+    padding: 0 0.25em;
+    font-size: 0.9em;
+    background: var(--color-paper);
+    border: 1px solid var(--color-ink);
+  }
+}
+
+.small {
+  font-size: 13px;
+}
+
+.body {
+  font-size: 15px;
+}
+
+.large {
+  font-size: 18px;
+}
+
+.default {
+  color: inherit;
+}
+
+.muted {
+  color: var(--color-muted);
+}

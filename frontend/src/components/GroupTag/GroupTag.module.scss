@@ -1,0 +1,12 @@
+.tag {
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}

@@ -1,0 +1,64 @@
+// The one global sheet: design tokens and page defaults. Components read the tokens.
+:root {
+  --color-paper: #f3efe6;
+  --color-surface: #fffdf7;
+  --color-ink: #1b1a17;
+  --color-muted: #57534e;
+  --color-accent: #f59e0b;
+  --color-link-hover: #c2410c;
+  --color-danger: #b91c1c;
+  --color-danger-surface: #fde2dd;
+  --color-danger-ink: #7f1d1d;
+  --color-success-surface: #e4efe0;
+
+  --border: 2px solid var(--color-ink);
+  --shadow: 6px 6px 0 var(--color-ink);
+  --shadow-small: 3px 3px 0 var(--color-ink);
+  --backdrop: rgb(27 26 23 / 40%);
+
+  // One focus look everywhere: a thick dotted ink ring, set off by a gap so it reads on any fill.
+  --focus-outline: 3px dotted var(--color-ink);
+  --focus-offset: 3px;
+
+  --font-body: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-display: 'Space Mono', ui-monospace, monospace;
+}
+
+// Keeps anything that scrolls into view (focus, anchors) clear of the sticky top bar.
+html {
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+a {
+  color: inherit;
+
+  &:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+// Rings are for keyboard users only (useInputModality sets the attribute): clicking or tapping into
+// a field never draws one. `:where` keeps this as weak as a plain `:focus-visible`, so a component
+// whose wrapper draws the ring can still switch off its inner control's.
+:focus {
+  outline: none;
+}
+
+:where(:root[data-input-modality='keyboard']) :focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+// Headings and <main> only take focus from script, to announce a new page: no ring needed.
+h1[tabindex='-1']:focus,
+main:focus {
+  outline: none;
+}

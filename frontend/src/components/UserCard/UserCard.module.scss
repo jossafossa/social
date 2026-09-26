@@ -1,0 +1,16 @@
+.row {
+  flex-wrap: nowrap;
+  padding: 16px 20px;
+  background: var(--color-surface);
+  border: var(--border);
+}
+
+.details {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+}

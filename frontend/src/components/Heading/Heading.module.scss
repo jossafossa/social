@@ -1,0 +1,20 @@
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+// Section labels read like code comments: "// YOUR GROUPS".
+.label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  &::before {
+    content: '// ';
+  }
+}

@@ -1,0 +1,24 @@
+.text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.body {
+  font-size: 15px;
+}
+
+.large {
+  font-size: 18px;
+}
+
+.default {
+  color: inherit;
+}
+
+.muted {
+  color: var(--color-muted);
+}

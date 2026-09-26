@@ -1,0 +1,9 @@
+.card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 28px;
+  padding: 28px;
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: var(--shadow);
+}

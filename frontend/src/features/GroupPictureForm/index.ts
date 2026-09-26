@@ -1,0 +1,1 @@
+export { GroupPictureForm } from './GroupPictureForm'

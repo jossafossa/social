@@ -1,0 +1,28 @@
+// Indented behind a rule, so the thread reads as part of the post above it.
+.thread {
+  padding-left: 16px;
+  border-left: var(--border);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Name and age on one line: a long name is cut off, the age stays.
+.meta {
+  flex-wrap: nowrap;
+  font-size: 13px;
+
+  > :last-child {
+    flex-shrink: 0;
+  }
+}
+
+.author {
+  font-weight: 700;
+}

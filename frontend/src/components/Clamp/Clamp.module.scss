@@ -1,0 +1,32 @@
+.content {
+  align-self: stretch;
+}
+
+// The height is set on the child, so `lh` is the child's own line height (a small comment's lines
+// are shorter than a post's).
+.clamped {
+  overflow: hidden;
+
+  > * {
+    max-height: calc(var(--lines) * 1lh);
+    overflow: hidden;
+  }
+}
+
+// Fades the last line out, so the cut reads as "there is more".
+.faded > * {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2lh), transparent);
+}
+
+.toggle {
+  padding: 4px 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}

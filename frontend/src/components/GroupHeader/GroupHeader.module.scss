@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 32px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.picture {
+  display: flex;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.title {
+  flex-grow: 1;
+}

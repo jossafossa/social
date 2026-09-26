@@ -1,0 +1,10 @@
+// One line, cut off with an ellipsis: for names, which should never push a row onto two lines.
+// Give the element the full name as `title`. In a flex row the parent needs `flex-wrap: nowrap`,
+// or the row wraps before the name shrinks.
+.truncate {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

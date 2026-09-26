@@ -1,0 +1,31 @@
+.dialog {
+  box-sizing: border-box;
+  width: min(480px, calc(100vw - 32px));
+  padding: 28px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: 8px 8px 0 var(--color-ink);
+
+  &::backdrop {
+    background: var(--backdrop);
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 20px;
+  align-items: center;
+  margin: 0;
+}
+
+.keys {
+  display: flex;
+  gap: 4px;
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+}

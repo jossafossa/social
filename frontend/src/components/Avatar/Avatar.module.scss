@@ -1,0 +1,37 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  object-fit: cover;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.small {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.medium {
+  width: 56px;
+  height: 56px;
+  font-size: 22px;
+}
+
+.large {
+  width: 96px;
+  height: 96px;
+  font-family: var(--font-display);
+  font-size: 44px;
+  border: var(--border);
+}
+
+.xlarge {
+  width: 160px;
+  height: 160px;
+  font-family: var(--font-display);
+  font-size: 72px;
+  border: var(--border);
+}

@@ -1,0 +1,13 @@
+// A full-width rule with the button on it: the list visibly goes on past here.
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-top: var(--border);
+  }
+}

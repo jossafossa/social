@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+**/.playwright-cli
+backend/pb_data
+backend/pocketbase
+backend/LICENSE.md
+.git
+.claude
+*.md

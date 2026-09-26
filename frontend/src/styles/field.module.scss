@@ -1,0 +1,55 @@
+// Shared by TextField, TextArea and FileField: a full-width label over its control.
+.field {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+// Read by screen readers, not shown.
+.hiddenLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hint {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-muted);
+}
+
+.control {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: var(--border);
+  border-radius: 0;
+}
+
+.error {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-danger);
+
+  &::before {
+    content: '! ';
+  }
+}
+
+.invalid {
+  border-color: var(--color-danger);
+}

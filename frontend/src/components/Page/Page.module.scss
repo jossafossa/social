@@ -1,0 +1,15 @@
+.page {
+  max-width: 880px;
+}
+
+.withAside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 40px;
+  max-width: 1200px;
+}
+
+.aside {
+  padding-left: 24px;
+  border-left: var(--border);
+}

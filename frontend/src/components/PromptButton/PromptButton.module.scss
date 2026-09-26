@@ -1,0 +1,31 @@
+.prompt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 0 12px 0 20px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--color-muted);
+  text-align: left;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-ink);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-ink);
+  }
+}
+
+.action {
+  padding: 6px 12px;
+  font-weight: 700;
+  color: var(--color-paper);
+  background: var(--color-ink);
+}
+
+.end {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

@@ -1,0 +1,18 @@
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  padding: 32px;
+  background: var(--color-surface);
+  border: var(--border);
+  box-shadow: 8px 8px 0 var(--color-danger);
+}
