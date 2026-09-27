@@ -1,7 +1,7 @@
 .dialog {
   box-sizing: border-box;
   width: min(480px, calc(100vw - 32px));
-  padding: 28px;
+  padding: 0;
   color: var(--color-ink);
   background: var(--color-surface);
   border: var(--border);
@@ -10,6 +10,11 @@
   &::backdrop {
     background: var(--backdrop);
   }
+}
+
+// The padding lives here, not on the dialog: see useModalDialog.
+.content {
+  padding: 28px;
 }
 
 .list {

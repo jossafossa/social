@@ -1,6 +1,7 @@
-import { useEffect, useRef, type FormEvent } from 'react'
+import type { FormEvent } from 'react'
 import { Kbd } from '../Kbd'
 import { Text } from '../Text'
+import { useModalDialog } from '../useModalDialog'
 import styles from './SearchOverlay.module.scss'
 
 type SearchOverlayProps = {
@@ -9,22 +10,10 @@ type SearchOverlayProps = {
   onSearch: (query: string) => void
 }
 
-// Full-page search. A native modal dialog: it traps focus, focuses the input and closes on Esc.
+// Full-page search. A native modal dialog: it traps focus, focuses the input and closes on Esc or
+// a click anywhere around the search box (the dialog covers the page, see useModalDialog).
 export const SearchOverlay = ({ isOpen, onClose, onSearch }: SearchOverlayProps) => {
-  const dialogRef = useRef<HTMLDialogElement>(null)
-
-  useEffect(() => {
-    const dialog = dialogRef.current
-    if (!dialog) {
-      return
-    }
-    if (isOpen && !dialog.open) {
-      dialog.showModal()
-    }
-    if (!isOpen && dialog.open) {
-      dialog.close()
-    }
-  }, [isOpen])
+  const dialogRef = useModalDialog(isOpen, onClose)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
