@@ -35,7 +35,7 @@ export const GroupsPage = () => {
           </ButtonLink>
         )}
       </PageHeader>
-      <SearchBar key={query} label="Search groups" defaultValue={query} onSearch={handleSearch} />
+      <SearchBar label="Search groups" defaultValue={query} onSearch={handleSearch} />
       <QueryStatus isLoading={isLoading} error={error} />
       {groups && (
         <List

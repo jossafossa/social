@@ -43,7 +43,7 @@ export const SearchPage = () => {
     <Page>
       <PageHeader title="~/search" />
       <SearchBar
-        key={query}
+        isPageAutofocus
         label="Search people and groups"
         defaultValue={query}
         onSearch={handleSearch}

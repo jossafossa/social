@@ -364,8 +364,8 @@ this repo lives here.
   `data-arrow-item`). Only a real composite control (tabs, toolbar) may be a single Tab stop.
   Lists take `loadMore` so focus lands on the first new item; full-page lists (post feeds,
   friends, groups) also set `isAutomatic` to load on scroll. Comments and search, which stacks two
-  lists, keep the button. Navigation focuses the page's search
-  box, else its `h1` (`usePageFocus`); a shortcut that places focus itself navigates with
+  lists, keep the button. Navigation focuses the page's `h1`
+  (`usePageFocus`), or a field marked `data-page-autofocus` on a page that is only that field (search); a shortcut that places focus itself navigates with
   `keepFocusState`.
 - Never `disabled` a button while a request runs: it drops keyboard focus. Use `isBusy`. When
   something a control opened closes again, return focus to that control (`useFocusReturn`).

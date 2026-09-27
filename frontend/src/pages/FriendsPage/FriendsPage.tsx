@@ -64,7 +64,7 @@ export const FriendsPage = () => {
           {!isGuest && (count === 1 ? '1 friend' : `${count} friends`)}
         </Text>
       </PageHeader>
-      <SearchBar key={query} label="Search people" defaultValue={query} onSearch={handleSearch} />
+      <SearchBar label="Search people" defaultValue={query} onSearch={handleSearch} />
       <Stack as="section" gap="medium">
         <Heading level={2}>{listTitle}</Heading>
         <QueryStatus isLoading={isLoading} error={error} />
