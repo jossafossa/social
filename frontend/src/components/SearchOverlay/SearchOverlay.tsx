@@ -47,6 +47,7 @@ export const SearchOverlay = ({ isOpen, onClose, onSearch }: SearchOverlayProps)
           </span>
           <input
             type="search"
+            enterKeyHint="search"
             name="query"
             aria-label="Search people and groups"
             placeholder="search people & groups"

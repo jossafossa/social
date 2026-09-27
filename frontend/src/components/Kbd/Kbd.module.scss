@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 // System UI font: it has proper ⌘ and ↵ glyphs, where the monospace face falls back per glyph.
 .key {
   display: inline-flex;
@@ -48,4 +50,11 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
+}
+
+// No keyboard on a touch screen: key hints only get in the way.
+@include no-keyboard {
+  .group {
+    display: none;
+  }
 }

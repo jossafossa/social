@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -32,4 +34,11 @@
 
 .title {
   flex-grow: 1;
+}
+
+@include below($phone) {
+  .header {
+    gap: 16px;
+    padding: 20px;
+  }
 }

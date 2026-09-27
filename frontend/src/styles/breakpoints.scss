@@ -1,0 +1,19 @@
+// Media queries can't read custom properties, so the breakpoints are Sass. `@use` this file.
+// Below each width:
+$wide: 1100px; // the home page's side column goes away (its links are all in the menu)
+$drawer: 900px; // the sidebar becomes a slide-in menu
+$phone: 600px; // single columns and tighter padding
+
+@mixin below($width) {
+  @media (max-width: ($width - 0.02px)) {
+    @content;
+  }
+}
+
+// Touch screens and phone-width windows: no keyboard to press (or no room), so key hints and
+// shortcut help are noise there.
+@mixin no-keyboard {
+  @media (hover: none) and (pointer: coarse), (max-width: ($phone - 0.02px)) {
+    @content;
+  }
+}

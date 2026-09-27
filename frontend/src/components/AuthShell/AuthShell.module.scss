@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .shell {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -74,5 +76,45 @@
 
   &:focus-visible {
     transform: none;
+  }
+}
+
+// Narrow: the poster becomes a band over the form.
+@include below($drawer) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .poster {
+    gap: 16px;
+    padding: 24px 20px;
+  }
+
+  .slogan {
+    font-size: 44px;
+    letter-spacing: -1.5px;
+  }
+
+  .footnote {
+    display: none;
+  }
+
+  .main {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px 16px 40px;
+  }
+
+  // Back in the flow: above the card instead of pinned over it.
+  .topBar {
+    position: static;
+  }
+
+  .card {
+    align-self: center;
+    padding: 24px 20px;
   }
 }

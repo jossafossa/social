@@ -323,6 +323,9 @@ this repo lives here.
   margins between elements and no one-off flex CSS for spacing. Column stacks stretch children;
   inline controls sit in a `direction="row"` stack. `Card` and `Form` wrap a `Stack`.
 - Merge an optional `className` last with `classnames`.
+- Responsive: `@use '~/styles/breakpoints' as *` and `@include below($wide | $drawer | $phone)`.
+  Below `$drawer` the sidebar is a slide-in menu (`AppShell`). Key hints and keyboard help hide with
+  `@include no-keyboard` (touch screens and phone widths). No sideways scroll at 360px.
 - Names (users, groups) never wrap: cut them off with `~/styles/truncate.module.scss` and put
   the full name in `title`. Headings take `title` for this. A flex row holding a name needs
   `isWrapping={false}` (or `flex-wrap: nowrap`), or it wraps before the name shrinks.

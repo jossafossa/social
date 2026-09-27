@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .shell {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
@@ -13,9 +15,37 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 14px 40px;
   background: var(--color-paper);
   border-bottom: var(--border);
+}
+
+.topBarContent {
+  flex: 1;
+  min-width: 0;
+}
+
+// Only on narrow screens, where the sidebar is a slide-in menu.
+.menuButton {
+  display: none;
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+  white-space: nowrap;
+  background: transparent;
+  border: var(--border);
+  cursor: pointer;
+}
+
+.scrim {
+  display: none;
 }
 
 .main {
@@ -23,6 +53,74 @@
   width: 100%;
   max-width: 1280px;
   padding: 28px 40px 64px;
+}
+
+@include below($drawer) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  // Off screen until opened. `visibility` takes it out of the tab order and away from screen readers
+  // while closed, and waits for the slide to finish before hiding.
+  .drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: min(280px, 85vw);
+    background: var(--color-paper);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+
+  .menuOpen .drawer {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.2s ease;
+  }
+
+  .scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    display: block;
+    padding: 0;
+    background: var(--backdrop);
+    border: 0;
+  }
+
+  .menuButton {
+    display: block;
+  }
+
+  .topBar {
+    padding: 12px 20px;
+  }
+
+  .main {
+    padding: 24px 20px 56px;
+  }
+}
+
+@include below($phone) {
+  .topBar {
+    padding: 10px 16px;
+  }
+
+  .main {
+    padding: 20px 16px 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .menuOpen .drawer {
+    transition: none;
+  }
 }
 
 // Hidden until the first Tab reaches it.

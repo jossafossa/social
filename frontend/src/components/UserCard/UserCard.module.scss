@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .row {
   flex-wrap: nowrap;
   padding: 16px 20px;
@@ -13,4 +15,17 @@
 .name {
   font-size: 16px;
   font-weight: 700;
+}
+
+// Phones: the name and bio keep the width; the button drops onto its own line below them.
+@include below($phone) {
+  .row {
+    flex-wrap: wrap;
+    padding: 14px 16px;
+  }
+
+  .details {
+    flex-basis: 0;
+    min-width: 60%;
+  }
 }

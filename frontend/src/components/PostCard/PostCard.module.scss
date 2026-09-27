@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 // Per-post key hints (l, c, e, r): only for keyboard users, and only on the post that has focus.
 // A mouse click on a post never makes them appear.
 .post {
@@ -54,4 +56,25 @@
 
 .next {
   bottom: -14px;
+}
+
+// Phones: the time moves under the name, so the author and group names get the width.
+@include below($phone) {
+  .header {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+
+  // Lined up under the name: the small avatar (32px) plus the row gap (1rem).
+  .time {
+    flex-basis: calc(100% - 32px - 1rem);
+    margin-left: calc(32px + 1rem);
+    font-size: 12px;
+  }
+}
+
+@include no-keyboard {
+  .stepHint {
+    display: none;
+  }
 }

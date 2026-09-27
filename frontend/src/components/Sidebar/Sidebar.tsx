@@ -20,6 +20,8 @@ type SidebarProps = {
   account?: Account
   // The light / dark / device switch, at the bottom.
   themeSwitch?: ReactNode
+  // Any link followed: as a slide-in menu on narrow screens, the sidebar closes.
+  onNavigate?: () => void
 }
 
 const toNavItems = (isGuest: boolean) => [
@@ -31,20 +33,25 @@ const toNavItems = (isGuest: boolean) => [
 const toNavClassName = ({ isActive }: { isActive: boolean }) =>
   classNames(styles.item, isActive && styles.active)
 
-export const Sidebar = ({ account, themeSwitch }: SidebarProps) => {
+export const Sidebar = ({ account, themeSwitch, onNavigate }: SidebarProps) => {
   const itemsRef = useRef<HTMLUListElement>(null)
   // ↑ ↓ move through the menu, on top of Tab.
   useArrowNavigation(itemsRef, 1)
 
   return (
     <nav className={styles.sidebar} aria-label="Main">
-      <Link to={paths.home} className={styles.brand}>
+      <Link to={paths.home} className={styles.brand} onClick={onNavigate}>
         pb/social_
       </Link>
       <ul ref={itemsRef} className={styles.items}>
         {toNavItems(account === undefined).map(({ label, to }) => (
           <li key={to} data-arrow-item>
-            <NavLink to={to} end={to === paths.home} className={toNavClassName}>
+            <NavLink
+              to={to}
+              end={to === paths.home}
+              className={toNavClassName}
+              onClick={onNavigate}
+            >
               {label}
             </NavLink>
           </li>
@@ -57,6 +64,7 @@ export const Sidebar = ({ account, themeSwitch }: SidebarProps) => {
       {account ? (
         <NavLink
           to={paths.settings}
+          onClick={onNavigate}
           data-shortcut=","
           aria-keyshortcuts=","
           className={({ isActive }) => classNames(styles.user, isActive && styles.userActive)}
@@ -72,10 +80,10 @@ export const Sidebar = ({ account, themeSwitch }: SidebarProps) => {
       ) : (
         <div className={styles.guest}>
           <span className={styles.guestText}>reading as a guest</span>
-          <ButtonLink to={paths.login} variant="primary" size="small">
+          <ButtonLink to={paths.login} variant="primary" size="small" onClick={onNavigate}>
             log in
           </ButtonLink>
-          <ButtonLink to={paths.register} size="small">
+          <ButtonLink to={paths.register} size="small" onClick={onNavigate}>
             sign up
           </ButtonLink>
         </div>

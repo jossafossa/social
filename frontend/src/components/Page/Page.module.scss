@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .page {
   max-width: 880px;
 }
@@ -12,4 +14,16 @@
 .aside {
   padding-left: 24px;
   border-left: var(--border);
+}
+
+// Below this the side column goes: stacked under an endless feed it could never be reached, and its
+// links (groups, friends, search) are all in the menu.
+@include below($wide) {
+  .withAside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    display: none;
+  }
 }

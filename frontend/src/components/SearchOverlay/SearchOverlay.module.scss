@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .overlay {
   box-sizing: border-box;
   width: 100%;
@@ -82,4 +84,42 @@
   padding: 6px 10px;
   background: var(--color-surface);
   border: var(--border);
+}
+
+@include no-keyboard {
+  .hint {
+    display: none;
+  }
+}
+
+// Phones: near the top, full width, and text sized to fit.
+@include below($phone) {
+  .overlay {
+    padding: 72px 16px 0;
+  }
+
+  .field {
+    gap: 8px;
+    padding-left: 14px;
+    box-shadow: var(--shadow-small);
+  }
+
+  .prompt,
+  .input {
+    font-size: 22px;
+  }
+
+  .input {
+    min-height: 60px;
+    letter-spacing: 0;
+  }
+
+  // Just the input: the on-screen keyboard's search key submits it.
+  .submit {
+    display: none;
+  }
+
+  .field {
+    padding-right: 14px;
+  }
 }

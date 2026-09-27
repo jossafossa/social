@@ -1,3 +1,5 @@
+@use '~/styles/breakpoints' as *;
+
 .card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -6,4 +8,21 @@
   background: var(--color-surface);
   border: var(--border);
   box-shadow: var(--shadow);
+}
+
+@include below($phone) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+@include below($phone) {
+  // The 160px avatar would fill half the screen.
+  .card > :first-child {
+    width: 96px;
+    height: 96px;
+    font-size: 44px;
+  }
 }

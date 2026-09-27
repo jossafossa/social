@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Outlet, ScrollRestoration } from 'react-router'
 import { getFileUrl } from '~/api'
 import { AppShell, ShortcutHelp, Sidebar, Stack } from '~/components'
@@ -13,11 +14,18 @@ import {
 export const AppLayout = () => {
   const user = useCurrentUser()
   const handleLogout = useLogout()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { isHelpOpen, closeHelp } = useNavigationShortcuts()
   usePageFocus()
 
+  const handleMenuOpen = () => setIsMenuOpen(true)
+  const handleMenuClose = () => setIsMenuOpen(false)
+
   return (
     <AppShell
+      isMenuOpen={isMenuOpen}
+      onMenuOpen={handleMenuOpen}
+      onMenuClose={handleMenuClose}
       topBar={
         <Stack direction="row" justify="between" gap="medium" isWrapping={false}>
           <AppBreadcrumbs />
@@ -27,6 +35,7 @@ export const AppLayout = () => {
       sidebar={
         <Sidebar
           themeSwitch={<ThemeSwitch layout="stacked" />}
+          onNavigate={handleMenuClose}
           account={
             user && {
               name: user.name,
