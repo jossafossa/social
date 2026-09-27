@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { ListResult } from 'pocketbase'
+import { ClientResponseError, type ListResult } from 'pocketbase'
 import { getErrorMessage, shrinkImage, toPeriodStart, type PostSort } from '~/utils'
 import {
   commentsCollection,
@@ -30,6 +30,7 @@ import type {
   PostsQuery,
   RegisterInput,
   ReportPostInput,
+  ResetPasswordInput,
   UnlikeInput,
   UpdateGroupImageInput,
   UpdatePostInput,
@@ -237,8 +238,34 @@ export const api = createApi({
     requestVerification: builder.mutation<boolean, void>({
       queryFn: () => request(() => usersCollection.requestVerification(getAuthenticatedEmail())),
     }),
+    // A query, not a mutation: opening the link is the request, and a query runs once per token.
+    confirmEmail: builder.query<boolean, string>({
+      queryFn: (token) =>
+        request(async () => {
+          await usersCollection.confirmVerification(token)
+          // Logged in here: reload the account, so writing unlocks at once.
+          if (pb.authStore.isValid) {
+            await usersCollection.authRefresh()
+          }
+          return true
+        }),
+    }),
     requestPasswordReset: builder.mutation<boolean, string>({
       queryFn: (email) => request(() => usersCollection.requestPasswordReset(email)),
+    }),
+    resetPassword: builder.mutation<boolean, ResetPasswordInput>({
+      queryFn: ({ token, password }) =>
+        request(async () => {
+          try {
+            return await usersCollection.confirmPasswordReset(token, password, password)
+          } catch (error) {
+            // PocketBase says "token: Invalid or expired token.": the link is spent.
+            if (error instanceof ClientResponseError && error.response.data?.token) {
+              throw new Error('this link has expired: ask for a new one', { cause: error })
+            }
+            throw error
+          }
+        }),
     }),
     changePassword: builder.mutation<User, ChangePasswordInput>({
       queryFn: ({ userId, oldPassword, password }) =>
@@ -486,7 +513,9 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useRequestVerificationMutation,
+  useConfirmEmailQuery,
   useRequestPasswordResetMutation,
+  useResetPasswordMutation,
   useChangePasswordMutation,
   useDeleteAccountMutation,
   useGetUserQuery,

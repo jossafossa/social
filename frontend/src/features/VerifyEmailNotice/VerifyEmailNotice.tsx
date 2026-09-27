@@ -3,8 +3,8 @@ import { restoreSession, useRequestVerificationMutation } from '~/api'
 import { Button, Message, Stack } from '~/components'
 import { useCurrentUser } from '~/hooks'
 
-// Writing waits for a confirmed email. The link opens PocketBase's own page, usually in another tab,
-// so coming back here reloads the account: posting unlocks without a page reload.
+// Writing waits for a confirmed email. The link opens the confirm page in another tab, so coming
+// back here reloads the account: posting unlocks without a page reload.
 export const VerifyEmailNotice = () => {
   const user = useCurrentUser()
   const [requestVerification, { isLoading, isSuccess }] = useRequestVerificationMutation()

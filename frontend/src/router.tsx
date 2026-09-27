@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router'
 import { FriendsCrumb, GroupCrumb, UserCrumb, type CrumbHandle } from '~/features'
 import {
   AppLayout,
+  AuthLayout,
+  ConfirmEmailPage,
   CreateGroupPage,
   ErrorPage,
   ForgotPasswordPage,
@@ -14,6 +16,7 @@ import {
   MembersOnly,
   NotFoundPage,
   RegisterPage,
+  ResetPasswordPage,
   SearchPage,
   SettingsPage,
   UserPage,
@@ -46,6 +49,22 @@ export const router = createBrowserRouter([
             path: paths.forgotPassword,
             element: <ForgotPasswordPage />,
             handle: trail(() => [{ id: 'reset', label: 'reset password' }]),
+          },
+        ],
+      },
+      // Email links: they work logged in or out.
+      {
+        element: <AuthLayout />,
+        children: [
+          {
+            path: paths.confirmEmail(':token'),
+            element: <ConfirmEmailPage />,
+            handle: trail(() => [{ id: 'confirm', label: 'confirm email' }]),
+          },
+          {
+            path: paths.resetPassword(':token'),
+            element: <ResetPasswordPage />,
+            handle: trail(() => [{ id: 'reset', label: 'new password' }]),
           },
         ],
       },

@@ -10,4 +10,7 @@ export const paths = {
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
+  // Linked from PocketBase's emails (backend/pb_migrations/10_app_email_links.js): keep in step.
+  confirmEmail: (token: string) => `/confirm-email/${token}`,
+  resetPassword: (token: string) => `/reset-password/${token}`,
 }

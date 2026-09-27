@@ -90,6 +90,11 @@ export type RegisterInput = LoginInput & {
   turnstileToken?: string
 }
 
+export type ResetPasswordInput = {
+  token: string
+  password: string
+}
+
 export type ReportPostInput = {
   postId: string
   reporterId: string
