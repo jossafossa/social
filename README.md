@@ -6,13 +6,27 @@ installable PWA that updates itself.
 
 ## Run
 
-```sh
-# backend (http://127.0.0.1:8090, admin UI at /_/)
-cd backend && ./pocketbase serve
+Prerequisites: Node + pnpm, the `pocketbase` binary in `backend/`, and
+[Mailpit](https://mailpit.axllent.org) for email (`brew install mailpit`; optional).
 
-# frontend (http://localhost:5173)
+```sh
 cd frontend && pnpm install && pnpm dev
 ```
+
+`pnpm dev` (`frontend/scripts/dev.mjs`) starts everything, and Ctrl+C (or closing the terminal)
+stops everything:
+
+| What          | Where                                                  |
+| ------------- | ------------------------------------------------------ |
+| App (Vite)    | http://localhost:5173                                  |
+| PocketBase    | http://127.0.0.1:8090, admin UI at `/_/`               |
+| Mailpit       | http://localhost:8025: every email lands here          |
+| Email preview | http://localhost:3030: the React Email templates, live |
+
+Nothing is really sent: PocketBase mails Mailpit, and the links in those emails open the dev app
+(`backend/pb_hooks/dev_mail.pb.js`, in memory only, so the database's own mail settings stay).
+Without Mailpit installed the app still runs; emails just aren't caught. Don't also run
+`./pocketbase serve` yourself: port 8090 is taken and `pnpm dev` stops.
 
 Admin UI needs a superuser: `./pocketbase superuser upsert you@example.com yourpassword`.
 
@@ -41,7 +55,8 @@ Stress-test data (local only): `./pocketbase seed [scale] --hooksDir=pb_seed`, r
 - `frontend/emails/` — the emails (confirm email, reset password, new-login alert) as React Email
   components in the site's style. `pnpm emails` renders them to `backend/pb_hooks/emails/*.html`
   (committed); `backend/pb_hooks/email_templates.pb.js` copies those into PocketBase on every
-  start, so they win over edits in the admin UI.
+  start, so they win over edits in the admin UI. `pnpm dev` previews them live and re-renders
+  on save; Mailpit shows the ones really sent.
 - `backend/pb_hooks/static_assets.pb.js` — cache headers for the built frontend (see Caching).
 - `frontend/src/api/` — PocketBase SDK client + RTK Query endpoints. Each endpoint wraps an SDK
   call in `queryFn`. Server-load rules: every list pages with `skipTotal`; `fields` trims other

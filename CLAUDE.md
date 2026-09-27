@@ -13,8 +13,9 @@ frontend (`frontend/`). Code style: [`.claude/coding-style.md`](.claude/coding-s
 | Format    | `pnpm format`    |
 | Build     | `pnpm build`     |
 | Storybook | `pnpm storybook` |
-| Emails    | `pnpm emails` (render `frontend/emails` into `backend/pb_hooks/emails`) |
+| Emails    | `pnpm emails` (render `frontend/emails` into `backend/pb_hooks/emails`; `pnpm dev` does it on save) |
 
-Backend: `cd backend && ./pocketbase serve` (schema lives in `backend/pb_migrations/`).
+`pnpm dev` also starts PocketBase, Mailpit (inbox http://localhost:8025) and the email preview
+(http://localhost:3030), and stops them on exit. Backend alone: `cd backend && ./pocketbase serve` (schema lives in `backend/pb_migrations/`).
 Stress-test data (local only, not in the Docker image): `./pocketbase seed [scale] --hooksDir=pb_seed`,
 remove with `./pocketbase seed clean --hooksDir=pb_seed`. Seeded users: `user1@seed.test` … / `password123`.
