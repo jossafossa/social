@@ -25,17 +25,18 @@
   color-scheme: dark;
 }
 
+// Light mode is warm: beige paper, cream cards, brown-black ink.
 :root {
-  --color-paper: #f3efe6;
-  --color-surface: #fffdf7;
-  --color-ink: #1b1a17;
-  --color-muted: #57534e;
+  --color-paper: #ebe2d0;
+  --color-surface: #f7f0e2;
+  --color-ink: #1f1a14;
+  --color-muted: #5f564a;
   --color-accent: #f59e0b;
   --color-link-hover: #c2410c;
   --color-danger: #b91c1c;
-  --color-danger-surface: #fde2dd;
+  --color-danger-surface: #f5d9cf;
   --color-danger-ink: #7f1d1d;
-  --color-success-surface: #e4efe0;
+  --color-success-surface: #e0e6cf;
   // Borders, "ink blocks" (dark fill, light text) and the offset shadows. All ink in light mode;
   // dark mode gives each its own, quieter shade.
   --color-line: var(--color-ink);
@@ -49,15 +50,15 @@
   --color-accent-on-ink: var(--color-accent);
   --color-muted-on-ink: #d6d0c4;
   // Fixed in both themes: text on the amber accent, and on and around the pastel swatches.
-  --color-on-accent: #1b1a17;
-  --color-on-swatch: #1b1a17;
-  --color-swatch-paper: #f3efe6;
-  --color-swatch-surface: #fffdf7;
+  --color-on-accent: #1f1a14;
+  --color-on-swatch: #1f1a14;
+  --color-swatch-paper: #ebe2d0;
+  --color-swatch-surface: #f7f0e2;
 
   --border: 2px solid var(--color-line);
   --shadow: 6px 6px 0 var(--color-shadow);
   --shadow-small: 3px 3px 0 var(--color-shadow);
-  --backdrop: rgb(27 26 23 / 40%);
+  --backdrop: rgb(31 26 20 / 40%);
 
   color-scheme: light;
 
