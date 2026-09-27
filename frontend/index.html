@@ -25,6 +25,18 @@
         }
       } catch {}
     </script>
+    <!-- Installed as an app: no pinch zoom, like a native app. A browser tab keeps it; people who
+         need larger text use the phone's own magnifier, which works in every app. -->
+    <script>
+      if (matchMedia('(display-mode: standalone)').matches || navigator.standalone === true) {
+        document
+          .querySelector('meta[name="viewport"]')
+          .setAttribute(
+            'content',
+            'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no',
+          )
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
