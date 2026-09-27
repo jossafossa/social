@@ -3,7 +3,19 @@ import { z } from 'zod'
 // Rules shared by several forms; each form composes its own schema from these.
 export const emailSchema = z.email('enter a valid email')
 
-export const passwordSchema = z.string().min(8, 'at least 8 characters')
+// PocketBase allows 71 characters, and bcrypt 72 bytes: a longer password fails with only "Failed
+// to create record.". Accented letters and emoji take several bytes, so check both.
+const maxPasswordBytes = 72
+const utf8 = new TextEncoder()
+
+export const passwordSchema = z
+  .string()
+  .min(8, 'at least 8 characters')
+  .max(71, 'at most 71 characters')
+  .refine(
+    (password) => utf8.encode(password).length <= maxPasswordBytes,
+    'too long: accents and emoji count extra, use fewer',
+  )
 
 export const contentSchema = z
   .string()
