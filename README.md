@@ -38,6 +38,10 @@ Stress-test data (local only): `./pocketbase seed [scale] --hooksDir=pb_seed`, r
 - `backend/pb_migrations/10_app_email_links.js` — confirmation and password reset emails link to
   the app (`/confirm-email/…`, `/reset-password/…`), not the admin UI, which can stay behind
   Cloudflare Zero Trust.
+- `frontend/emails/` — the emails (confirm email, reset password, new-login alert) as React Email
+  components in the site's style. `pnpm emails` renders them to `backend/pb_hooks/emails/*.html`
+  (committed); `backend/pb_hooks/email_templates.pb.js` copies those into PocketBase on every
+  start, so they win over edits in the admin UI.
 - `backend/pb_hooks/static_assets.pb.js` — cache headers for the built frontend (see Caching).
 - `frontend/src/api/` — PocketBase SDK client + RTK Query endpoints. Each endpoint wraps an SDK
   call in `queryFn`. Server-load rules: every list pages with `skipTotal`; `fields` trims other

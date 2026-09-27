@@ -13,6 +13,7 @@ frontend (`frontend/`). Code style: [`.claude/coding-style.md`](.claude/coding-s
 | Format    | `pnpm format`    |
 | Build     | `pnpm build`     |
 | Storybook | `pnpm storybook` |
+| Emails    | `pnpm emails` (render `frontend/emails` into `backend/pb_hooks/emails`) |
 
 Backend: `cd backend && ./pocketbase serve` (schema lives in `backend/pb_migrations/`).
 Stress-test data (local only, not in the Docker image): `./pocketbase seed [scale] --hooksDir=pb_seed`,

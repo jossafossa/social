@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
+    "emails": "email export --dir emails --outDir ../backend/pb_hooks/emails --pretty",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
+    "@react-email/ui": "^6.9.5",
     "@rolldown/plugin-babel": "^0.2.3",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
@@ -48,6 +50,7 @@
     "oxlint": "^1.81.0",
     "prettier": "^3.9.8",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "react-email": "^6.9.5",
     "sass-embedded": "^1.104.1",
     "storybook": "^10.6.0",
     "typescript": "~6.0.2",

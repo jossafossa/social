@@ -33,7 +33,7 @@
   },
   "overrides": [
     {
-      "files": ["vite.config.ts", "*.stories.tsx", ".storybook/*"],
+      "files": ["vite.config.ts", "*.stories.tsx", ".storybook/*", "emails/*.tsx"],
       "rules": {
         "import/no-default-export": "off"
       }
