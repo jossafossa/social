@@ -42,10 +42,10 @@ export const Sidebar = ({ account, themeSwitch, installButton, onNavigate }: Sid
 
   return (
     <nav className={styles.sidebar} aria-label="Main">
-      <Link to={paths.home} className={styles.brand} onClick={onNavigate}>
+      <Link to={paths.home} className={styles.brand} onClick={onNavigate} data-in-bottom-bar>
         pb/social_
       </Link>
-      <ul ref={itemsRef} className={styles.items}>
+      <ul ref={itemsRef} className={styles.items} data-in-bottom-bar>
         {toNavItems(account === undefined).map(({ label, to }) => (
           <li key={to} data-arrow-item>
             <NavLink
@@ -59,7 +59,7 @@ export const Sidebar = ({ account, themeSwitch, installButton, onNavigate }: Sid
           </li>
         ))}
       </ul>
-      <span className={styles.hint}>
+      <span className={styles.hint} data-in-bottom-bar>
         <Kbd keys={['[', ']']} /> switch section
       </span>
       <div className={styles.spacer} />

@@ -10,6 +10,7 @@ import {
   useNavigationShortcuts,
   usePageFocus,
 } from '~/hooks'
+import { paths } from '~/paths'
 
 export const AppLayout = () => {
   const user = useCurrentUser()
@@ -23,6 +24,12 @@ export const AppLayout = () => {
 
   return (
     <AppShell
+      quickLinks={[
+        { label: 'home', to: paths.home, end: true },
+        { label: user ? 'friends' : 'following', to: paths.friends },
+        { label: 'groups', to: paths.groups },
+        { label: 'search', to: paths.search },
+      ]}
       isMenuOpen={isMenuOpen}
       onMenuOpen={handleMenuOpen}
       onMenuClose={handleMenuClose}

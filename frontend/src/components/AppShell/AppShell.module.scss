@@ -15,33 +15,41 @@
   position: sticky;
   top: 0;
   z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 12px;
   padding: 14px 40px;
   background: var(--color-paper);
   border-bottom: var(--border);
 }
 
-.topBarContent {
-  flex: 1;
-  min-width: 0;
+// Only on narrow screens: home, friends, groups, search and the menu, along the bottom edge.
+.bottomBar {
+  display: none;
 }
 
-// Only on narrow screens, where the sidebar is a slide-in menu.
-.menuButton {
-  display: none;
-  flex-shrink: 0;
-  min-height: 40px;
-  padding: 0 12px;
+.quickLink {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 4px;
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--color-ink);
   white-space: nowrap;
+  text-decoration: none;
   background: transparent;
-  border: var(--border);
+  border: 0;
   cursor: pointer;
+
+  & + & {
+    border-left: var(--border);
+  }
+}
+
+.active {
+  color: var(--color-on-block-selected);
+  background: var(--color-block);
 }
 
 .scrim {
@@ -60,21 +68,38 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  // Off screen until opened. `visibility` takes it out of the tab order and away from screen readers
-  // while closed, and waits for the slide to finish before hiding.
+  // A sheet that slides up from the bottom bar's menu button. Off screen until opened: `visibility`
+  // takes it out of the tab order and away from screen readers while closed, and waits for the
+  // slide to finish before hiding.
   .drawer {
     position: fixed;
-    top: 0;
+    right: 0;
     bottom: 0;
     left: 0;
     z-index: 30;
-    width: min(280px, 85vw);
+    max-height: 85dvh;
+    overflow-y: auto;
     background: var(--color-paper);
-    transform: translateX(-100%);
+    border-top: var(--border);
+    transform: translateY(100%);
     visibility: hidden;
     transition:
       transform 0.2s ease,
       visibility 0s linear 0.2s;
+
+    // What the bottom bar already offers (the section links), the sidebar marks; the sheet leaves it out.
+    [data-in-bottom-bar] {
+      display: none;
+    }
+
+    // The sidebar fills the screen's height on wide screens; as a sheet it is as tall as its content.
+    > nav {
+      gap: 20px;
+      height: auto;
+      padding-top: 20px;
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+      border-right: 0;
+    }
   }
 
   .menuOpen .drawer {
@@ -93,8 +118,18 @@
     border: 0;
   }
 
-  .menuButton {
-    display: block;
+  .bottomBar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    display: flex;
+    box-sizing: border-box;
+    height: var(--bottom-bar-height);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--color-paper);
+    border-top: var(--border);
   }
 
   .topBar {
@@ -102,7 +137,7 @@
   }
 
   .main {
-    padding: 24px 20px 56px;
+    padding: 24px 20px calc(56px + var(--bottom-bar-height));
   }
 }
 
@@ -112,7 +147,7 @@
   }
 
   .main {
-    padding: 20px 16px 48px;
+    padding: 20px 16px calc(48px + var(--bottom-bar-height));
   }
 }
 

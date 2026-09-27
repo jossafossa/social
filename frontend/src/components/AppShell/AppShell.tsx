@@ -1,11 +1,22 @@
 import classNames from 'classnames'
 import { useEffect, useEffectEvent, useRef, type ReactNode } from 'react'
+import { NavLink } from 'react-router'
 import styles from './AppShell.module.scss'
+
+type QuickLink = {
+  label: string
+  to: string
+  // Active only on this exact path (home, which every other path starts with).
+  end?: boolean
+}
 
 type AppShellProps = {
   sidebar: ReactNode
   children: ReactNode
   topBar?: ReactNode
+  // Narrow screens: a bar along the bottom with these destinations and the menu button, where
+  // thumbs reach.
+  quickLinks?: QuickLink[]
   // Narrow screens: the sidebar slides in over the page. The layout owns the state, so the sidebar's
   // links can close it when they navigate.
   isMenuOpen?: boolean
@@ -20,6 +31,7 @@ export const AppShell = ({
   sidebar,
   children,
   topBar,
+  quickLinks = [],
   isMenuOpen = false,
   onMenuOpen,
   onMenuClose,
@@ -49,7 +61,9 @@ export const AppShell = ({
     if (!isMenuOpen) {
       return
     }
-    drawerRef.current?.querySelector<HTMLElement>('a[href], button')?.focus()
+    // The first control actually shown: the sheet hides the links the bottom bar already has.
+    const focusables = drawerRef.current?.querySelectorAll<HTMLElement>('a[href], button') ?? []
+    ;[...focusables].find((element) => element.checkVisibility())?.focus()
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeAndReturnFocus()
@@ -89,24 +103,32 @@ export const AppShell = ({
       )}
       {/* While the menu is open, the page behind it can't be reached. */}
       <div className={styles.column} inert={isMenuOpen}>
-        {topBar && (
-          <header className={styles.topBar}>
-            <button
-              ref={menuButtonRef}
-              type="button"
-              className={styles.menuButton}
-              aria-expanded={isMenuOpen}
-              aria-controls="menu"
-              onClick={onMenuOpen}
-            >
-              ≡ menu
-            </button>
-            <div className={styles.topBarContent}>{topBar}</div>
-          </header>
-        )}
+        {topBar && <header className={styles.topBar}>{topBar}</header>}
         <main id="main" tabIndex={-1} className={styles.main}>
           {children}
         </main>
+        <nav aria-label="Quick" className={styles.bottomBar}>
+          {quickLinks.map(({ label, to, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) => classNames(styles.quickLink, isActive && styles.active)}
+            >
+              {label}
+            </NavLink>
+          ))}
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className={styles.quickLink}
+            aria-expanded={isMenuOpen}
+            aria-controls="menu"
+            onClick={onMenuOpen}
+          >
+            ≡ menu
+          </button>
+        </nav>
       </div>
     </div>
   )

@@ -47,13 +47,9 @@
   background: var(--color-block);
 }
 
-// Narrow screens: just the button; it opens the same search.
+// Narrow screens: search sits in the bottom bar instead.
 @include below($drawer) {
   .trigger {
-    width: auto;
-  }
-
-  .field {
     display: none;
   }
 }
