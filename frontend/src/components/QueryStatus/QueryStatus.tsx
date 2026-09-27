@@ -1,4 +1,5 @@
 import { getErrorMessage } from '~/utils'
+import { LoadingState } from '../LoadingState'
 import { Message } from '../Message'
 
 type QueryStatusProps = {
@@ -11,7 +12,7 @@ export const QueryStatus = ({ isLoading, error }: QueryStatusProps) => {
     return <Message variant="error">{getErrorMessage(error)}</Message>
   }
   if (isLoading) {
-    return <Message variant="status">Loading…</Message>
+    return <LoadingState />
   }
   return undefined
 }

@@ -1,0 +1,35 @@
+.loading {
+  composes: empty from '../EmptyState/EmptyState.module.scss';
+  // <output> is inline and announced like role="status".
+  display: block;
+  opacity: 0;
+  animation: appear 0.15s ease 0.2s forwards;
+}
+
+.cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+// Shown at once and steady: no fade, no blinking.
+@media (prefers-reduced-motion: reduce) {
+  .loading {
+    opacity: 1;
+    animation: none;
+  }
+
+  .cursor {
+    animation: none;
+  }
+}
