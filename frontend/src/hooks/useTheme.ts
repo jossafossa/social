@@ -18,6 +18,18 @@ const read = (): Theme => {
 
 let current = read()
 
+// The browser and installed-app title bar follow <meta name="theme-color">. index.html has one per
+// system scheme; a chosen theme paints both with its own paper colour, "device" puts them back.
+const themeColorMetas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')]
+const deviceThemeColors = themeColorMetas.map((meta) => meta.content)
+
+const syncThemeColor = (theme: Theme) => {
+  const paper = getComputedStyle(document.documentElement).getPropertyValue('--color-paper').trim()
+  themeColorMetas.forEach((meta, index) => {
+    meta.content = theme === 'device' ? deviceThemeColors[index] : paper
+  })
+}
+
 // "device" leaves the attribute off, so the CSS follows prefers-color-scheme.
 const apply = (theme: Theme) => {
   if (theme === 'device') {
@@ -25,7 +37,11 @@ const apply = (theme: Theme) => {
   } else {
     document.documentElement.dataset.theme = theme
   }
+  syncThemeColor(theme)
 }
+
+// A theme chosen earlier was set by index.html before the app loaded; match the title bar to it.
+syncThemeColor(current)
 
 const subscribe = (listener: () => void) => {
   listeners.add(listener)

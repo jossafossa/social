@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Outlet, ScrollRestoration } from 'react-router'
 import { getFileUrl } from '~/api'
 import { AppShell, ShortcutHelp, Sidebar, Stack } from '~/components'
-import { AppBreadcrumbs, GlobalSearch, ThemeSwitch } from '~/features'
+import { AppBreadcrumbs, GlobalSearch, InstallButton, ThemeSwitch } from '~/features'
 import {
   shortcutList,
   useCurrentUser,
@@ -35,6 +35,7 @@ export const AppLayout = () => {
       sidebar={
         <Sidebar
           themeSwitch={<ThemeSwitch layout="stacked" />}
+          installButton={<InstallButton />}
           onNavigate={handleMenuClose}
           account={
             user && {

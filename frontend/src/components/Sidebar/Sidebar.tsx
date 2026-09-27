@@ -20,6 +20,8 @@ type SidebarProps = {
   account?: Account
   // The light / dark / device switch, at the bottom.
   themeSwitch?: ReactNode
+  // Install as an app, above the theme switch; renders nothing where installing isn't possible.
+  installButton?: ReactNode
   // Any link followed: as a slide-in menu on narrow screens, the sidebar closes.
   onNavigate?: () => void
 }
@@ -33,7 +35,7 @@ const toNavItems = (isGuest: boolean) => [
 const toNavClassName = ({ isActive }: { isActive: boolean }) =>
   classNames(styles.item, isActive && styles.active)
 
-export const Sidebar = ({ account, themeSwitch, onNavigate }: SidebarProps) => {
+export const Sidebar = ({ account, themeSwitch, installButton, onNavigate }: SidebarProps) => {
   const itemsRef = useRef<HTMLUListElement>(null)
   // ↑ ↓ move through the menu, on top of Tab.
   useArrowNavigation(itemsRef, 1)
@@ -88,6 +90,7 @@ export const Sidebar = ({ account, themeSwitch, onNavigate }: SidebarProps) => {
           </ButtonLink>
         </div>
       )}
+      {installButton}
       {themeSwitch}
       <div className={styles.footer}>
         {account && (
