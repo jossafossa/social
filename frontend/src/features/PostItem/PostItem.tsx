@@ -5,6 +5,7 @@ import { useCurrentUser, useFocusReturn } from '~/hooks'
 import { EditPostForm } from '../EditPostForm'
 import { LikeButton } from '../LikeButton'
 import { PostComments } from '../PostComments'
+import { ReportButton } from '../ReportButton'
 
 type PostItemProps = {
   post: FeedPost
@@ -23,6 +24,7 @@ export const PostItem = ({ post }: PostItemProps) => {
   const editButtonRef = useFocusReturn<HTMLButtonElement>(mode === 'editing')
 
   const isOwnPost = user !== undefined && post.author === user.id
+  const canReport = user !== undefined && !isOwnPost
 
   const handleEdit = () => setMode('editing')
   const handleCloseEdit = () => setMode('reading')
@@ -67,6 +69,7 @@ export const PostItem = ({ post }: PostItemProps) => {
             edit
           </Button>
         )}
+        {canReport && <ReportButton postId={post.id} />}
       </Stack>
       {isShowingComments && <PostComments postId={post.id} commentCount={post.comments} />}
     </PostCard>

@@ -1,5 +1,5 @@
 import PocketBase, { ClientResponseError } from 'pocketbase'
-import type { Comment, FileOwner, Group, Like, Membership, Post, User } from './types'
+import type { Comment, FileOwner, Group, Like, Membership, Post, Report, User } from './types'
 
 // Defaults to the page's own origin, which is where PocketBase serves the built app from pb_public.
 export const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL ?? window.location.origin)
@@ -13,6 +13,7 @@ export const membershipsCollection = pb.collection<Membership>('memberships')
 export const postsCollection = pb.collection<Post>('posts')
 export const likesCollection = pb.collection<Like>('likes')
 export const commentsCollection = pb.collection<Comment>('comments')
+export const reportsCollection = pb.collection<Report>('reports')
 
 // The saved user is a snapshot from login: it misses fields added since and edits made elsewhere,
 // so reload it before the first render. Only a 401 means the session is gone; a network blip or

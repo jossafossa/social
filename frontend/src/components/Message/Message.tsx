@@ -4,7 +4,7 @@ import styles from './Message.module.scss'
 
 type MessageProps = {
   children: ReactNode
-  variant: 'error' | 'status'
+  variant: 'error' | 'status' | 'notice'
 }
 
 export const Message = ({ children, variant }: MessageProps) => (

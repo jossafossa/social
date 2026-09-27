@@ -22,3 +22,11 @@
     content: '✓ ';
   }
 }
+
+.notice {
+  background: var(--color-surface);
+
+  &::before {
+    content: '> ';
+  }
+}

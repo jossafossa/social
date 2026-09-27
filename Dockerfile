@@ -8,6 +8,9 @@ WORKDIR /app
 COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY frontend/ ./
+# Public (it ships in the page). Coolify: add it as a build variable.
+ARG VITE_TURNSTILE_SITE_KEY
+ENV VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
 RUN pnpm build
 
 # ---- Runtime: PocketBase serves the API and the built frontend ----

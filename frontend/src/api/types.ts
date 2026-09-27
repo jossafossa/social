@@ -2,6 +2,8 @@ import type { RecordModel } from 'pocketbase'
 import type { PostPeriod, PostSort } from '~/utils'
 
 export type User = RecordModel & {
+  email: string
+  verified: boolean
   name: string
   bio: string
   avatar: string
@@ -31,6 +33,11 @@ export type Membership = RecordModel & {
 export type Like = RecordModel & {
   post: string
   user: string
+}
+
+export type Report = RecordModel & {
+  post: string
+  reporter: string
 }
 
 export type Comment = RecordModel & {
@@ -80,6 +87,12 @@ export type LoginInput = {
 
 export type RegisterInput = LoginInput & {
   name: string
+  turnstileToken?: string
+}
+
+export type ReportPostInput = {
+  postId: string
+  reporterId: string
 }
 
 export type UpdateUserInput = {

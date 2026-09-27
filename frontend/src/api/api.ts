@@ -8,6 +8,7 @@ import {
   membershipsCollection,
   pb,
   postsCollection,
+  reportsCollection,
   usersCollection,
 } from './pocketbase'
 import type {
@@ -28,6 +29,7 @@ import type {
   PostsFilter,
   PostsQuery,
   RegisterInput,
+  ReportPostInput,
   UnlikeInput,
   UpdateGroupImageInput,
   UpdatePostInput,
@@ -219,11 +221,21 @@ export const api = createApi({
         request(async () => (await usersCollection.authWithPassword(email, password)).record),
     }),
     register: builder.mutation<User, RegisterInput>({
-      queryFn: ({ name, email, password }) =>
+      queryFn: ({ name, email, password, turnstileToken }) =>
         request(async () => {
-          await usersCollection.create({ name, email, password, passwordConfirm: password })
+          // PocketBase emails the confirmation link itself (pb_hooks/spam.pb.js).
+          await usersCollection.create({
+            name,
+            email,
+            password,
+            passwordConfirm: password,
+            turnstileToken,
+          })
           return (await usersCollection.authWithPassword(email, password)).record
         }),
+    }),
+    requestVerification: builder.mutation<boolean, void>({
+      queryFn: () => request(() => usersCollection.requestVerification(getAuthenticatedEmail())),
     }),
     requestPasswordReset: builder.mutation<boolean, string>({
       queryFn: (email) => request(() => usersCollection.requestPasswordReset(email)),
@@ -429,6 +441,13 @@ export const api = createApi({
         })
       },
     }),
+    reportPost: builder.mutation<boolean, ReportPostInput>({
+      queryFn: ({ postId, reporterId }) =>
+        request(async () => {
+          await reportsCollection.create({ post: postId, reporter: reporterId }, { fields: 'id' })
+          return true
+        }),
+    }),
     getComments: builder.infiniteQuery<ListResult<Comment>, string, number>({
       infiniteQueryOptions: toPageOptions(commentPageSize),
       queryFn: ({ queryArg: postId, pageParam }) =>
@@ -466,6 +485,7 @@ export const api = createApi({
 export const {
   useLoginMutation,
   useRegisterMutation,
+  useRequestVerificationMutation,
   useRequestPasswordResetMutation,
   useChangePasswordMutation,
   useDeleteAccountMutation,
@@ -489,6 +509,7 @@ export const {
   useUpdatePostMutation,
   useLikePostMutation,
   useUnlikePostMutation,
+  useReportPostMutation,
   useGetCommentsInfiniteQuery,
   useCreateCommentMutation,
 } = api

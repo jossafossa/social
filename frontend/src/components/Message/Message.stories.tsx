@@ -14,3 +14,4 @@ type Story = StoryObj<typeof meta>
 
 export const Error: Story = {}
 export const Status: Story = { args: { variant: 'status', children: 'saved' } }
+export const Notice: Story = { args: { variant: 'notice', children: 'confirm your email to post' } }

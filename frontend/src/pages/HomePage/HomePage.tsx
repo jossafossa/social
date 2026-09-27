@@ -1,6 +1,6 @@
 import type { PostsFilter } from '~/api'
 import { Disclosure, Page, PageHeader, PromptButton, Text } from '~/components'
-import { HomeAside, PostFeed, PostForm } from '~/features'
+import { HomeAside, PostFeed, PostForm, VerifyEmailNotice } from '~/features'
 import { useCurrentUser, useGuestFollows } from '~/hooks'
 
 export const HomePage = () => {
@@ -30,6 +30,7 @@ export const HomePage = () => {
           {subtitle}
         </Text>
       </PageHeader>
+      <VerifyEmailNotice />
       {user && (
         <Disclosure
           label="new post"

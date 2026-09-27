@@ -1,0 +1,9 @@
+.turnstile {
+  display: grid;
+  gap: 6px;
+}
+
+// Cloudflare's iframe is 65px tall; reserve it so the button below doesn't jump when it appears.
+.widget {
+  min-height: 65px;
+}

@@ -33,6 +33,8 @@ Stress-test data (local only): `./pocketbase seed [scale] --hooksDir=pb_seed`, r
   `UPDATE … + 1`), so feeds never load likes or comments to count them. Clients can't set them.
 - `backend/pb_hooks/line_endings.pb.js` — stores bios with `\n` line breaks when a save includes a
   file (multipart sends `\r\n`, which broke the length limit).
+- `backend/pb_migrations/9_anti_spam.js` + `backend/pb_hooks/spam.pb.js` — spam and trolls (see
+  Moderation).
 - `backend/pb_hooks/static_assets.pb.js` — cache headers for the built frontend (see Caching).
 - `frontend/src/api/` — PocketBase SDK client + RTK Query endpoints. Each endpoint wraps an SDK
   call in `queryFn`. Server-load rules: every list pages with `skipTotal`; `fields` trims other
@@ -55,12 +57,31 @@ Stress-test data (local only): `./pocketbase seed [scale] --hooksDir=pb_seed`, r
 
 - Create a superuser: `./pocketbase superuser upsert EMAIL PASS`.
 - Admin UI → Settings → Application: set the public **App URL** (used in email links).
-- Admin UI → Settings → Mail: configure **SMTP**, or password reset emails won't arrive.
+- Admin UI → Settings → Mail: configure **SMTP**, or password reset and confirmation emails won't
+  arrive, and nobody who signs up can post.
+- Cloudflare Turnstile (dashboard → Turnstile → add widget for your domain): set the site key as
+  the Coolify **build variable** `VITE_TURNSTILE_SITE_KEY` and the secret key as the runtime
+  variable `TURNSTILE_SECRET_KEY`. Without both, signup has no human check.
+- Cloudflare dashboard: turn on **Bot Fight Mode**.
 - Trusted proxy header `CF-Connecting-IP` is set by `backend/pb_migrations/4_trusted_proxy.js`
   (Cloudflare Tunnel). Never expose port 8090 publicly: the header is only trustworthy when
   every request comes through Cloudflare.
 - Admin UI → Settings → Backups: schedule backups of the database (ideally to S3).
 - A short privacy note (you store EU users' email addresses).
+
+## Moderation
+
+- Signup: Turnstile human check, no disposable email domains (`backend/pb_hooks/disposable_domains.txt`,
+  from github.com/disposable-email-domains), at most 5 signups per IP an hour.
+- Writing (posts, comments, likes, groups, reports) needs a confirmed email. Accounts made before
+  this was added were marked confirmed.
+- Per account: in its first day 5 posts and 20 comments an hour and no links; after that 30 posts,
+  120 comments and 5 links per message. The same post twice in a day is refused.
+- **Ban** someone: admin UI → users → tick `banned`. Their profile, posts and comments disappear
+  for everyone but themselves, and they can't write. Untick to undo.
+- **Reports**: 3 reports from accounts older than a day set the post's `hidden`, so only its author
+  still sees it. Review in admin UI → reports (or posts, filter `hidden = true`): untick `hidden`
+  to restore the post, or ban the author.
 
 ## Deploy (Coolify + Cloudflare Tunnel)
 
