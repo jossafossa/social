@@ -97,6 +97,9 @@
 html {
   scroll-padding-top: 96px;
   scroll-padding-bottom: var(--bottom-bar-height);
+  // No double-tap zoom, so taps respond at once like an app. Pinch zoom stays: people who need
+  // bigger text must be able to get it. (Fields are 16px+, so iOS doesn't zoom in on focus either.)
+  touch-action: manipulation;
 }
 
 body {
