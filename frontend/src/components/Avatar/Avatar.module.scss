@@ -5,7 +5,8 @@
   flex-shrink: 0;
   object-fit: cover;
   font-weight: 700;
-  color: var(--color-ink);
+  // On a pastel swatch in both themes.
+  color: var(--color-on-swatch);
 }
 
 .small {

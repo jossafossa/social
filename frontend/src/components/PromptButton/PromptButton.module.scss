@@ -9,7 +9,7 @@
   color: var(--color-muted);
   text-align: left;
   background: var(--color-surface);
-  border: 2px dashed var(--color-ink);
+  border: 2px dashed var(--color-line);
   cursor: pointer;
 
   &:hover {
@@ -20,8 +20,8 @@
 .action {
   padding: 6px 12px;
   font-weight: 700;
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
 }
 
 .end {

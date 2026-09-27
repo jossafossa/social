@@ -11,7 +11,7 @@
   align-items: center;
   gap: 1rem;
   padding: 16px;
-  border: 2px dashed var(--color-ink);
+  border: 2px dashed var(--color-line);
   cursor: pointer;
   // The real control inside is hidden or borderless, so the whole control shows the ring.
   :global(:root[data-input-modality='keyboard']) &:has(:focus-visible) {

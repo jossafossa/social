@@ -4,6 +4,22 @@
   align-items: flex-end;
   gap: 24px;
   padding: 32px;
+  // On the group's pastel swatch: light colours in both themes, so its text, borders and buttons
+  // stay readable in dark mode too.
+  --color-ink: var(--color-on-swatch);
+  --color-paper: var(--color-swatch-paper);
+  --color-surface: var(--color-swatch-surface);
+  --color-shadow: var(--color-on-swatch);
+  --color-line: var(--color-on-swatch);
+  --color-block: var(--color-on-swatch);
+  --color-on-block: var(--color-swatch-paper);
+  --color-accent-on-ink: var(--color-accent);
+  // Re-declared: tokens built from ink resolve where they are declared, not here.
+  --border: 2px solid var(--color-line);
+  --shadow: 6px 6px 0 var(--color-shadow);
+  --shadow-small: 3px 3px 0 var(--color-shadow);
+
+  color: var(--color-ink);
   border: var(--border);
   box-shadow: var(--shadow);
 }

@@ -11,6 +11,15 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PocketBase demo</title>
+    <!-- Set the chosen theme before the first paint (see src/hooks/useTheme.ts, same key). -->
+    <script>
+      try {
+        const theme = localStorage.getItem('theme')
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

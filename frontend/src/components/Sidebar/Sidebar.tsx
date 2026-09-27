@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useRef } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { Link, NavLink } from 'react-router'
 import { paths } from '~/paths'
 import { Avatar } from '../Avatar'
@@ -18,6 +18,8 @@ type SidebarProps = {
   // Left out for a visitor: they get log in / sign up instead, and follow people instead of
   // having friends.
   account?: Account
+  // The light / dark / device switch, at the bottom.
+  themeSwitch?: ReactNode
 }
 
 const toNavItems = (isGuest: boolean) => [
@@ -29,7 +31,7 @@ const toNavItems = (isGuest: boolean) => [
 const toNavClassName = ({ isActive }: { isActive: boolean }) =>
   classNames(styles.item, isActive && styles.active)
 
-export const Sidebar = ({ account }: SidebarProps) => {
+export const Sidebar = ({ account, themeSwitch }: SidebarProps) => {
   const itemsRef = useRef<HTMLUListElement>(null)
   // ↑ ↓ move through the menu, on top of Tab.
   useArrowNavigation(itemsRef, 1)
@@ -78,6 +80,7 @@ export const Sidebar = ({ account }: SidebarProps) => {
           </ButtonLink>
         </div>
       )}
+      {themeSwitch}
       <div className={styles.footer}>
         {account && (
           <button type="button" className={styles.logout} onClick={account.onLogout}>

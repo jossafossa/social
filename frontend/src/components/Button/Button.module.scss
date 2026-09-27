@@ -37,17 +37,18 @@
 }
 
 .primary {
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-block);
+  color: var(--color-on-block);
 }
 
 .accent {
+  color: var(--color-on-accent);
   background: var(--color-accent);
   box-shadow: var(--shadow-small);
 
   &:active:not(:disabled) {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 var(--color-ink);
+    box-shadow: 1px 1px 0 var(--color-shadow);
   }
 }
 
@@ -78,7 +79,7 @@
   text-decoration: none;
 
   &.primary:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-on-ink);
   }
 
   &.accent:hover,

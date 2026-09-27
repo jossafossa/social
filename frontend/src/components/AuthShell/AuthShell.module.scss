@@ -9,8 +9,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 56px;
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
 }
 
 .brand {
@@ -27,12 +27,12 @@
 }
 
 .accent {
-  color: var(--color-accent);
+  color: var(--color-accent-on-ink);
 }
 
 .footnote {
   font-size: 13px;
-  color: #d6d0c4;
+  color: var(--color-muted-on-ink);
 }
 
 .main {
@@ -46,6 +46,7 @@
 .topBar {
   position: absolute;
   top: 24px;
+  right: 56px;
   left: 56px;
 }
 
@@ -56,7 +57,7 @@
   padding: 32px;
   background: var(--color-surface);
   border: var(--border);
-  box-shadow: 8px 8px 0 var(--color-ink);
+  box-shadow: 8px 8px 0 var(--color-shadow);
 }
 
 // Hidden until the first Tab reaches it.
@@ -67,8 +68,8 @@
   z-index: 20;
   padding: 10px 14px;
   font-weight: 700;
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
   transform: translateY(-200%);
 
   &:focus-visible {

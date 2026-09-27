@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router'
-import { AuthShell } from '~/components'
-import { AppBreadcrumbs } from '~/features'
+import { AuthShell, Stack } from '~/components'
+import { AppBreadcrumbs, ThemeSwitch } from '~/features'
 import { useCurrentUser, usePageFocus } from '~/hooks'
 import { paths } from '~/paths'
 
@@ -13,7 +13,14 @@ export const GuestLayout = () => {
   }
 
   return (
-    <AuthShell topBar={<AppBreadcrumbs />}>
+    <AuthShell
+      topBar={
+        <Stack direction="row" justify="between" gap="medium">
+          <AppBreadcrumbs />
+          <ThemeSwitch />
+        </Stack>
+      }
+    >
       <Outlet />
     </AuthShell>
   )

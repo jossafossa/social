@@ -1,5 +1,5 @@
-import { useId } from 'react'
 import { postPeriods, postSorts, type PostPeriod, type PostSort } from '~/utils'
+import { SegmentedControl } from '../SegmentedControl'
 import { Stack } from '../Stack'
 import styles from './FeedControls.module.scss'
 
@@ -10,47 +10,10 @@ type FeedControlsProps = {
   onPeriodChange: (period: PostPeriod) => void
 }
 
-type SegmentedProps<Value extends string> = {
-  legend: string
-  options: readonly Value[]
-  value: Value
-  onChange: (value: Value) => void
-}
-
-// Native radios: one Tab stop per group, arrow keys pick an option.
-const Segmented = <Value extends string>({
-  legend,
-  options,
-  value,
-  onChange,
-}: SegmentedProps<Value>) => {
-  const name = useId()
-  return (
-    <fieldset className={styles.group}>
-      <legend className={styles.legend}>{legend}</legend>
-      <div className={styles.options}>
-        {options.map((option) => (
-          <label key={option} className={styles.option}>
-            <input
-              type="radio"
-              name={name}
-              value={option}
-              checked={option === value}
-              className={styles.input}
-              onChange={() => onChange(option)}
-            />
-            <span className={styles.face}>{option}</span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
-  )
-}
-
 export const FeedControls = ({ sort, period, onSortChange, onPeriodChange }: FeedControlsProps) => (
   <Stack direction="row" gap="medium" className={styles.controls}>
-    <Segmented legend="sort" options={postSorts} value={sort} onChange={onSortChange} />
-    <Segmented
+    <SegmentedControl legend="sort" options={postSorts} value={sort} onChange={onSortChange} />
+    <SegmentedControl
       legend="from the last"
       options={postPeriods}
       value={period}

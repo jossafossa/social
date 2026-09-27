@@ -1,7 +1,7 @@
 import { Outlet, ScrollRestoration } from 'react-router'
 import { getFileUrl } from '~/api'
 import { AppShell, ShortcutHelp, Sidebar, Stack } from '~/components'
-import { AppBreadcrumbs, GlobalSearch } from '~/features'
+import { AppBreadcrumbs, GlobalSearch, ThemeSwitch } from '~/features'
 import {
   shortcutList,
   useCurrentUser,
@@ -26,6 +26,7 @@ export const AppLayout = () => {
       }
       sidebar={
         <Sidebar
+          themeSwitch={<ThemeSwitch layout="stacked" />}
           account={
             user && {
               name: user.name,

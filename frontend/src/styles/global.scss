@@ -1,4 +1,30 @@
 // The one global sheet: design tokens and page defaults. Components read the tokens.
+
+// Dark mode is quieter than an inverted light mode: neutral greys, borders a step above the surface
+// instead of the text colour, and "ink blocks" (primary buttons, the active menu item) as raised grey
+// blocks with amber for hover and focus, rather than bright slabs.
+@mixin dark-colors {
+  --color-paper: #121315;
+  --color-surface: #1a1b1e;
+  --color-ink: #e4e4e1;
+  --color-muted: #9c9da3;
+  --color-line: #34363b;
+  --color-block: #2c2e33;
+  --color-on-block: #f4f4f2;
+  --color-on-block-selected: #fbbf24;
+  --color-link-hover: #fbbf24;
+  --color-danger: #f87171;
+  --color-danger-surface: #3a1a1a;
+  --color-danger-ink: #fecaca;
+  --color-success-surface: #18261c;
+  --color-shadow: rgb(0 0 0 / 55%);
+  --color-accent-on-ink: #fbbf24;
+  --color-muted-on-ink: #9c9da3;
+  --backdrop: rgb(0 0 0 / 60%);
+
+  color-scheme: dark;
+}
+
 :root {
   --color-paper: #f3efe6;
   --color-surface: #fffdf7;
@@ -10,11 +36,30 @@
   --color-danger-surface: #fde2dd;
   --color-danger-ink: #7f1d1d;
   --color-success-surface: #e4efe0;
+  // Borders, "ink blocks" (dark fill, light text) and the offset shadows. All ink in light mode;
+  // dark mode gives each its own, quieter shade.
+  --color-line: var(--color-ink);
+  --color-block: var(--color-ink);
+  --color-on-block: var(--color-paper);
+  // A picked option (segmented controls, pressed toolbar buttons): in dark mode the grey block alone
+  // is too close to the rest, so its text turns amber.
+  --color-on-block-selected: var(--color-on-block);
+  --color-shadow: var(--color-ink);
+  // Accent text on an ink block (hover on the active menu item): amber on dark, darker amber on light.
+  --color-accent-on-ink: var(--color-accent);
+  --color-muted-on-ink: #d6d0c4;
+  // Fixed in both themes: text on the amber accent, and on and around the pastel swatches.
+  --color-on-accent: #1b1a17;
+  --color-on-swatch: #1b1a17;
+  --color-swatch-paper: #f3efe6;
+  --color-swatch-surface: #fffdf7;
 
-  --border: 2px solid var(--color-ink);
-  --shadow: 6px 6px 0 var(--color-ink);
-  --shadow-small: 3px 3px 0 var(--color-ink);
+  --border: 2px solid var(--color-line);
+  --shadow: 6px 6px 0 var(--color-shadow);
+  --shadow-small: 3px 3px 0 var(--color-shadow);
   --backdrop: rgb(27 26 23 / 40%);
+
+  color-scheme: light;
 
   // One focus look everywhere: a thick dotted ink ring, set off by a gap so it reads on any fill.
   --focus-outline: 3px dotted var(--color-ink);
@@ -22,6 +67,18 @@
 
   --font-body: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --font-display: 'Space Mono', ui-monospace, monospace;
+}
+
+// Theme: data-theme on <html> is "light", "dark" or absent (follow the device); see useTheme and the
+// inline script in index.html that sets it before the first paint.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include dark-colors;
+  }
+}
+
+:root[data-theme='dark'] {
+  @include dark-colors;
 }
 
 // Keeps anything that scrolls into view (focus, anchors) clear of the sticky top bar.

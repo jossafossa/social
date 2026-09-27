@@ -21,7 +21,7 @@
   color: var(--color-ink);
   background: var(--color-surface);
   border: var(--border);
-  box-shadow: 2px 2px 0 var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-shadow);
 }
 
 .compact {
@@ -32,7 +32,7 @@
   color: var(--color-ink);
   background: var(--color-surface);
   border: var(--border);
-  box-shadow: 1px 1px 0 var(--color-ink);
+  box-shadow: 1px 1px 0 var(--color-shadow);
 }
 
 .inline {

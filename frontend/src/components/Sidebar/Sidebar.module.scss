@@ -37,8 +37,8 @@
 .active {
   padding-left: 12px;
   font-weight: 500;
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
 
   &::before {
     content: '> ';
@@ -46,7 +46,7 @@
   }
 
   &:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-on-ink);
   }
 }
 
@@ -62,20 +62,20 @@
   text-decoration: none;
   background: var(--color-surface);
   border: var(--border);
-  box-shadow: 4px 4px 0 var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-shadow);
 }
 
 .userActive {
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
   box-shadow: 4px 4px 0 var(--color-accent);
 
   .userHint {
-    color: var(--color-paper);
+    color: var(--color-on-block);
   }
 
   &:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-on-ink);
   }
 }
 

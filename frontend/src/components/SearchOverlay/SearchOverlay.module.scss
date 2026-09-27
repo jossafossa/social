@@ -30,7 +30,7 @@
   padding-left: 24px;
   background: var(--color-surface);
   border: var(--border);
-  box-shadow: 8px 8px 0 var(--color-ink);
+  box-shadow: 8px 8px 0 var(--color-shadow);
 
   :global(:root[data-input-modality='keyboard']) &:has(:focus-visible) {
     outline: var(--focus-outline);
@@ -49,14 +49,14 @@
   font: inherit;
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-paper);
-  background: var(--color-ink);
+  color: var(--color-on-block);
+  background: var(--color-block);
   border: 0;
   border-left: var(--border);
   cursor: pointer;
 
   &:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-on-ink);
   }
 }
 
